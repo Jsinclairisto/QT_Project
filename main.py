@@ -1,6 +1,6 @@
 import sys
 from PySide2.QtUiTools import QUiLoader #allows us to import .ui files
-from PySide2.QtWidgets import QApplication, QLineEdit, QPushButton, QFileDialog, QAction
+from PySide2.QtWidgets import QApplication, QLineEdit, QPushButton, QFileDialog, QAction, QSlider
 from PySide2.QtCore import QFile, QObject, QUrl
 from PySide2.QtMultimedia import QMediaPlayer
 
@@ -38,8 +38,14 @@ class MainWindow(QObject):
         pause_button = self.window.findChild(QPushButton, 'pause_button')
         pause_button.clicked.connect(self.pause_button_clicked)
 
-        volume_slider = self.window.findChild(QSlider, 'volume_slider')
-        volume_slider.connect(self.volume_control)
+        self.volume_slider = self.window.findChild(QSlider, 'volume_slider')
+        self.volume_slider.valueChanged.connect(self.volume_control)
+
+        self.volume_slider.setMinimum(1)
+        self.volume_slider.setMaximum(90)
+        self.volume_slider.setValue(25)
+        self.volume_slider.setTickInterval(10)
+        self.volume_slider.setTickPosition(QSlider.TicksBelow)
 
         #show window to user
         self.window.show()
@@ -58,7 +64,8 @@ class MainWindow(QObject):
         self.music_player.pause()
 
     def volume_control(self):
-        
+        vol_level = int(self.volume_slider.value())
+        self.music_player.setVolume(vol_level)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
