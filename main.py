@@ -1,4 +1,3 @@
-
 import sys
 from PySide2.QtUiTools import QUiLoader #allows us to import .ui files
 from PySide2.QtWidgets import QApplication, QLineEdit, QPushButton, QFileDialog, QAction
@@ -36,6 +35,12 @@ class MainWindow(QObject):
         play_button = self.window.findChild(QPushButton, 'play_button')
         play_button.clicked.connect(self.play_button_clicked)
 
+        pause_button = self.window.findChild(QPushButton, 'pause_button')
+        pause_button.clicked.connect(self.pause_button_clicked)
+
+        volume_slider = self.window.findChild(QSlider, 'volume_slider')
+        volume_slider.connect(self.volume_control)
+
         #show window to user
         self.window.show()
 
@@ -48,6 +53,12 @@ class MainWindow(QObject):
 
     def play_button_clicked(self):
         self.music_player.play()
+
+    def pause_button_clicked(self):
+        self.music_player.pause()
+
+    def volume_control(self):
+        
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
