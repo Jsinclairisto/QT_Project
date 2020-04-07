@@ -38,6 +38,8 @@ class MainWindow(QObject):
         pause_button = self.window.findChild(QPushButton, 'pause_button')
         pause_button.clicked.connect(self.pause_button_clicked)
 
+        song_library = self.window.findChild(QListView, 'song_library')
+
         self.volume_slider = self.window.findChild(QSlider, 'volume_slider')
         self.volume_slider.valueChanged.connect(self.volume_control)
 
