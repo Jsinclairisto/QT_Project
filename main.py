@@ -48,10 +48,10 @@ class MainWindow(QObject):
         # toggle_back = self.window.findChild(QPushButton, 'toggle_back')
         # toggle_back.clicked.connect(self.toggle_back_function)
 
-        song_library = self.window.findChild(QListWidget, 'song_library')
+        self.song_library = self.window.findChild(QListWidget, 'song_library')
 
        	
-       	#song_library.insertItem(1, "videogame.mp3")
+       	#self.song_library.addItem(1, "videogame.mp3")
 
         self.volume_slider = self.window.findChild(QSlider, 'volume_slider')
         self.volume_slider.valueChanged.connect(self.volume_control)
